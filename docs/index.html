@@ -59,25 +59,19 @@
 <span class="n">worker</span><span class="o">.</span><span class="n">work</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Example client:</p>
-<div class="highlight-python"><pre>Single task::
-
-    client = GearmanClient(["127.0.0.1"])
-    res = client.do_task(Task("echo", "foo"))
-    assert res == "foo"
-
-Multiple parallel tasks::
-
-    client = GearmanClient(["127.0.0.1"])
-    ts = Taskset([Task(func="echo", arg="foo")])
-    client.do_taskset(ts)
-    for task in ts:
-        assert ts.result == "foo"
-&gt;&gt;&gt; from scrubber import Scrubber
-&gt;&gt;&gt; scrubber = Scrubber(autolink=True)
-&gt;&gt;&gt; scrubber.scrub("&lt;script&gt;alert('foo');&lt;/script&gt;&lt;p&gt;bar, www.google.com&lt;/p&gt;")
-u'&lt;p&gt;bar, &lt;a href="http://www.google.com" rel="nofollow"&gt;www.google.com&lt;/a&gt;&lt;/p&gt;'
-&gt;&gt;&gt;</pre>
+<p>Example client (single task):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">GearmanClient</span><span class="p">([</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">])</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">do_task</span><span class="p">(</span><span class="n">Task</span><span class="p">(</span><span class="s">&quot;echo&quot;</span><span class="p">,</span> <span class="s">&quot;foo&quot;</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">res</span> <span class="o">==</span> <span class="s">&quot;foo&quot;</span>
+</pre></div>
+</div>
+<p>Example client (multiple parallel tasks):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">client</span> <span class="o">=</span> <span class="n">GearmanClient</span><span class="p">([</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">])</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">Taskset</span><span class="p">([</span><span class="n">Task</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="s">&quot;echo&quot;</span><span class="p">,</span> <span class="n">arg</span><span class="o">=</span><span class="s">&quot;foo&quot;</span><span class="p">)])</span>
+<span class="n">client</span><span class="o">.</span><span class="n">do_taskset</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">ts</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">ts</span><span class="o">.</span><span class="n">result</span> <span class="o">==</span> <span class="s">&quot;foo&quot;</span>
+</pre></div>
 </div>
 </div>
 </div>
