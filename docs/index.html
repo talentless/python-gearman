@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>python-gearman &mdash; python-gearman v1.3.2 documentation</title>
+    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.3.2',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="python-gearman v1.3.2 documentation" href="" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="">python-gearman v1.3.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="python-gearman">
+<h1>python-gearman<a class="headerlink" href="#python-gearman" title="Permalink to this headline">¶</a></h1>
+<p>python-gearman is a pure Python Gearman library.</p>
+<p>See <a class="reference external" href="http://www.danga.com/gearman/">http://www.danga.com/gearman/</a> for more about Gearman.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Stable releases of python-gearman can be installed using
+<tt class="docutils literal"><span class="pre">easy_install</span></tt> or <tt class="docutils literal"><span class="pre">pip</span></tt>.</p>
+</div>
+<div class="section" id="source">
+<h2>Source<a class="headerlink" href="#source" title="Permalink to this headline">¶</a></h2>
+<p>You can find the latest version of scrubber at
+<a class="reference external" href="http://github.com/samuel/python-gearman">http://github.com/samuel/python-gearman</a></p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Example worker:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">worker</span> <span class="o">=</span> <span class="n">GearmanWorker</span><span class="p">([</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">])</span>
+<span class="n">worker</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="s">&quot;echo&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">job</span><span class="p">:</span><span class="n">job</span><span class="o">.</span><span class="n">arg</span><span class="p">)</span>
+<span class="n">worker</span><span class="o">.</span><span class="n">work</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Example client:</p>
+<div class="highlight-python"><pre>Single task::
+
+    client = GearmanClient(["127.0.0.1"])
+    res = client.do_task(Task("echo", "foo"))
+    assert res == "foo"
+
+Multiple parallel tasks::
+
+    client = GearmanClient(["127.0.0.1"])
+    ts = Taskset([Task(func="echo", arg="foo")])
+    client.do_taskset(ts)
+    for task in ts:
+        assert ts.result == "foo"
+&gt;&gt;&gt; from scrubber import Scrubber
+&gt;&gt;&gt; scrubber = Scrubber(autolink=True)
+&gt;&gt;&gt; scrubber.scrub("&lt;script&gt;alert('foo');&lt;/script&gt;&lt;p&gt;bar, www.google.com&lt;/p&gt;")
+u'&lt;p&gt;bar, &lt;a href="http://www.google.com" rel="nofollow"&gt;www.google.com&lt;/a&gt;&lt;/p&gt;'
+&gt;&gt;&gt;</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">python-gearman</a><ul>
+<li><a class="reference external" href="#installation">Installation</a></li>
+<li><a class="reference external" href="#source">Source</a></li>
+<li><a class="reference external" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="sources/index.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="">python-gearman v1.3.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Samuel Stauffer.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>
