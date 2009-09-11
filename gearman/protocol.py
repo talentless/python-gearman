@@ -18,8 +18,10 @@ COMMANDS = {
 
      8: ("job_created", ["handle"]),
      9: ("grab_job", []),
+    30: ("grab_job_uniq", []),
     10: ("no_job", []),
     11: ("job_assign", ["handle", "func", "arg"]),
+    31: ("job_assign_uniq", ["handle", "func", "uniq", "arg"]),
 
     12: ("work_status", ["handle", "numerator", "denominator"]),
     13: ("work_complete", ["handle", "result"]),
