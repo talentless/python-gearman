@@ -7,9 +7,10 @@ from gearman.client import GearmanBaseClient
 log = logging.getLogger("gearman")
 
 class GearmanJob(object):
-    def __init__(self, conn, func, arg, handle):
+    def __init__(self, conn, func, arg, uniq, handle):
         self.func = func
         self.arg = arg
+        self.uniq = uniq
         self.handle = handle
         self.conn = conn
 
