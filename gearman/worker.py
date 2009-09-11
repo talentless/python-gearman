@@ -86,7 +86,7 @@ class GearmanWorker(GearmanBaseClient):
         self.working = False
 
     def _work_connection(self, conn, hooks=None):
-        conn.send_command("grab_job")
+        conn.send_command("grab_job_uniq")
         cmd = ('noop',)
         while cmd and cmd[0] == 'noop':
             cmd = conn.recv_blocking(timeout=0.5)
@@ -94,7 +94,7 @@ class GearmanWorker(GearmanBaseClient):
         if not cmd or cmd[0] == 'no_job':
             return False
 
-        if cmd[0] != "job_assign":
+        if cmd[0] != "job_assign" and cmd[0] != "job_assign_uniq":
             if cmd[0] == "error":
                 log.error("Error from server: %s: %s" % (cmd[1]['err_code'], cmd[1]['err_text']))
             else:
